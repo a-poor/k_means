@@ -33,6 +33,11 @@
         width: 150px;
         text-align: center;
       }
+      ol {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 500px;
+      }
       p {
         text-align: center;
         margin-left: auto;
@@ -58,7 +63,13 @@
       <table>
     </div>
     <div class="text">
-      <p>Visualization of the <a href="https://en.wikipedia.org/wiki/K-means_clustering">k-Means Clustering Algorithm</a>. Use the sliders to adjust the value of k and the number of points.</p>
+      <p>Visualization of the <a href="https://en.wikipedia.org/wiki/K-means_clustering">k-Means Clustering Algorithm</a>. Use the sliders above to adjust the value of k and the number of points. The algorithm works by:</p>
+      <ol>
+        <li>Picking k random points from the pool to use as the inital means</li>
+        <li>Grouping the rest of the points by which mean they are closest to</li>
+        <li>moving the means to the center of their clusters</li>
+        <li>repeating 2 and 3 until equilibrium has been reached</li>
+      </ol>
     </div>
   </body>
 </html>
