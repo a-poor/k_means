@@ -9,16 +9,35 @@
 
     <style>
       .heading {
-
+        font-family: "Helvetica", sans-serif;
+        text-align: center;
       }
-      .sketch {
-
+      #sketch {
+        display: flex;
+        justify-content: center;
+        padding: 1%;
       }
-      .slider {
-
+      canvas {
+        margin-left: auto;
+        margin-right: auto;
       }
-      .text {
-
+      .sliders {
+        justify-content: center;
+        padding: 1%;
+      }
+      table {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      td {
+        width: 150px;
+        text-align: center;
+      }
+      p {
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 600px;
       }
     </style>
   </head>
@@ -29,15 +48,17 @@
     </div>
     <div id="sketch"></div>
     <div class="sliders">
-      <p> k-Means:
-      <input type="range" min="2" max="50" value="3" step="1" id="k-value-slider"/>
-      <span id="k-value">3</span>
-      </p>
-      <p> n-Points:
-      <input type="range" min="500" max="20000" value="10000" step="100" id="p-value-slider"/>
-      <span id="p-value">10,000</span>
-      </p>
+      <table>
+        <tr>
+          <td>k-Means: <span id="k-value">20</span></td>
+          <td><input type="range" min="2" max="50" value="20" step="1" id="k-value-slider"/></td>
+          <td>n-Points: <span id="p-value">10,000</span></td>
+          <td><input type="range" min="500" max="20000" value="10000" step="500" id="p-value-slider"/></td>
+        </tr>
+      <table>
     </div>
-    <div class="text"></div>
+    <div class="text">
+      <p>Visualization of the <a href="https://en.wikipedia.org/wiki/K-means_clustering">k-Means Clustering Algorithm</a>. Use the sliders to adjust the value of k and the number of points.</p>
+    </div>
   </body>
 </html>

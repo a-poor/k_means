@@ -1,5 +1,5 @@
 let n_points = 10000;
-let k = 3;
+let k = 20;
 
 let points = [];
 let means;
@@ -12,6 +12,7 @@ function setup() {
   // Create the canvas and add it to the #sketch div
   let c = createCanvas(600,600);
   c.parent("sketch");
+  // c.center("horizontal");
   // Set a low-ish frame rate
   frameRate(6);
 
@@ -106,8 +107,14 @@ function initialize() {
   // Find the initial means
   means = forgy(k);
   // Create the random color scheme
+  colorMode(HSL, 360, 100, 100);
   for (i = 0; i < k; i++) {
-    cluster_colors.push(random_hsl());
+    cluster_colors.push(color(
+      floor(360/k) * i,
+      80 + random(20),
+      30 + random(40)
+    ));
+    // cluster_colors.push(random_hsl());
   }
 }
 
