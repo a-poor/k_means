@@ -1,31 +1,21 @@
-const n_points = 15000;
-const k = 10;
+let n_points = 15000;
+let k = 10;
 
 let points = [];
 let means;
-let point_clusters = [];
 let cluster_colors = [];
 
 function setup() {
   createCanvas(600,600);
-  frameRate(12);
+  frameRate(24);
 
-  for (let i = 0; i < n_points; i++) {
-    points.push(createVector(random(width), random(height)));
-  }
-  means = forgy(k);
-
-  for (i = 0; i < k; i++) {
-    cluster_colors.push(color(
-      50 * floor(random(4)) + 50,
-      50 * floor(random(4)) + 50,
-      50 * floor(random(4)) + 50
-    ));
-    point_clusters.push([]);
-  }
+  initialize();
 }
 function draw() {
+  colorMode(RGB, 255);
   background(0);
+  point_clusters = [];
+  for (let i = 0; i < k; i++) point_clusters.push([]);
 
   // Iterate through the points
   strokeWeight(5);
@@ -69,6 +59,21 @@ function draw() {
 }
 
 
+function initialize() {
+  // Create the points
+  points = [];
+  for (let i = 0; i < n_points; i++) {
+    points.push(createVector(random(width), random(height)));
+  }
+  // Find the initial means
+  means = forgy(k);
+  // Create the random color scheme
+  for (i = 0; i < k; i++) {
+    cluster_colors.push(random_hsl());
+  }
+}
+
+
 function forgy(n) {
   let select_points = [];
   while (select_points.length < n &&
@@ -86,4 +91,21 @@ function forgy(n) {
     }
   }
   return select_points;
+}
+
+function random_rgb() {
+  colorMode(RGB, 255);
+  return color(
+    50 * floor(random(4)) + 50,
+    50 * floor(random(4)) + 50,
+    50 * floor(random(4)) + 50
+  );
+}
+function random_hsl() {
+  colorMode(HSL, 360, 100, 100);
+  return color(
+    floor(random(40)) * 9,
+    80 + random(20),
+    30 + random(40)
+  );
 }
