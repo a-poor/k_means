@@ -1,16 +1,54 @@
-let n_points = 15000;
+let n_points = 5000;
 let k = 10;
 
 let points = [];
 let means;
 let cluster_colors = [];
 
-function setup() {
-  createCanvas(600,600);
-  frameRate(24);
+let k_slider;
+let p_slider;
 
+function setup() {
+  // Create the canvas and add it to the #sketch div
+  let c = createCanvas(600,600);
+  c.parent("sketch");
+  // Set a low-ish frame rate
+  frameRate(6);
+
+  // Initialize the points and starting means
   initialize();
+
+  // Attach event listeners to the sliders for updating k-value and n-points
+  k_slider = document.getElementById("k-value-slider");
+  k_slider.addEventListener('input', () => {
+    let raw_k = k_slider.value;
+    let new_k = parseInt(raw_k);
+    document.getElementById("k-value").innerHTML = formatNumber(new_k);
+  });
+  k_slider.addEventListener('mouseup', () => {
+    let raw_k = k_slider.value;
+    let new_k = parseInt(raw_k);
+    document.getElementById("k-value").innerHTML = formatNumber(new_k);
+    k = new_k;
+    initialize();
+  });
+
+  p_slider = document.getElementById("p-value-slider");
+  p_slider.addEventListener('input', () => {
+    let raw_p = p_slider.value;
+    let new_p = parseInt(raw_p);
+    document.getElementById("p-value").innerHTML = formatNumber(new_p);
+  });
+  p_slider.addEventListener('mouseup', () => {
+    let raw_p = p_slider.value;
+    let new_p = parseInt(raw_p);
+    document.getElementById("p-value").innerHTML = formatNumber(new_p);
+    n_points = new_p;
+    initialize();
+  });
+
 }
+
 function draw() {
   colorMode(RGB, 255);
   background(0);
@@ -93,14 +131,6 @@ function forgy(n) {
   return select_points;
 }
 
-function random_rgb() {
-  colorMode(RGB, 255);
-  return color(
-    50 * floor(random(4)) + 50,
-    50 * floor(random(4)) + 50,
-    50 * floor(random(4)) + 50
-  );
-}
 function random_hsl() {
   colorMode(HSL, 360, 100, 100);
   return color(
@@ -108,4 +138,9 @@ function random_hsl() {
     80 + random(20),
     30 + random(40)
   );
+}
+
+
+function formatNumber(num) {
+  return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
 }
