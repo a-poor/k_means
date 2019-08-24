@@ -1,5 +1,5 @@
-let n_points = 5000;
-let k = 10;
+let n_points = 10000;
+let k = 3;
 
 let points = [];
 let means;
@@ -139,7 +139,6 @@ function random_hsl() {
     30 + random(40)
   );
 }
-
 
 function formatNumber(num) {
   return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
