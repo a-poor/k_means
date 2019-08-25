@@ -1,9 +1,11 @@
 let n_points = 10000;
 let k = 20;
+let convergence_tollerence = 0.01;
 
 let points = [];
-let means;
+let means = [];
 let cluster_colors = [];
+let convergence_reached;
 
 let k_slider;
 let p_slider;
@@ -94,7 +96,31 @@ function draw() {
     }
     new_means[i].div(point_clusters[i].length);
   }
-  means = new_means;
+  let means_changed = false;
+  for (let i = 0; i < means.length; i++) {
+    if (means[i].dist(new_means[i]) > convergence_tollerence) {
+      means_changed = true;
+      break;
+    }
+  }
+  if (means_changed) {
+    means = new_means;
+  } else {
+    console.log("Convergence reached. Stopping.");
+    convergence_reached = true;
+    noLoop();
+  }
+  if (convergence_reached) {
+    noFill();
+    stroke(100,200,100);
+    strokeWeight(10);
+    rect(0,0,width,height);
+  } else {
+    noFill();
+    stroke(250,100,100);
+    strokeWeight(10);
+    rect(0,0,width,height);
+  }
 }
 
 
@@ -111,13 +137,13 @@ function initialize() {
   for (i = 0; i < k; i++) {
     cluster_colors.push(color(
       floor(360/k) * i,
-      80 + random(20),
-      30 + random(40)
+      70 + random(30),
+      30 + random(50)
     ));
-    // cluster_colors.push(random_hsl());
   }
+  // Reset convergence_reached
+  convergence_reached = false;
 }
-
 
 function forgy(n) {
   let select_points = [];
@@ -138,15 +164,7 @@ function forgy(n) {
   return select_points;
 }
 
-function random_hsl() {
-  colorMode(HSL, 360, 100, 100);
-  return color(
-    floor(random(40)) * 9,
-    80 + random(20),
-    30 + random(40)
-  );
-}
-
+//Format number with commas for displaying
 function formatNumber(num) {
   return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
 }
