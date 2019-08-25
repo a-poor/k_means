@@ -102,6 +102,7 @@ function draw() {
       }
       new_means[i].div(point_clusters[i].length);
     }
+    // Check to see if convergence has been reached
     let means_changed = false;
     for (let i = 0; i < means.length; i++) {
       if (means[i].dist(new_means[i]) > convergence_tollerence) {
@@ -114,9 +115,8 @@ function draw() {
     } else {
       console.log("Convergence reached. Stopping.");
       convergence_reached = true;
-      noLoop();
     }
-
+    // Draw red box around canvas
     noFill();
     stroke(250,100,100);
     strokeWeight(10);
@@ -127,7 +127,6 @@ function draw() {
 
 function initialize() {
   // Create the points
-  loop();
   points = [];
   for (let i = 0; i < n_points; i++) {
     points.push(createVector(random(width), random(height)));
