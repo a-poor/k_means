@@ -139,7 +139,7 @@ function initialize() {
     cluster_colors.push(color(
       floor(360/k) * i,
       70 + random(30),
-      30 + random(50)
+      40 + random(40)
     ));
   }
   // Reset convergence_reached
