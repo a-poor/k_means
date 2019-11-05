@@ -13,3 +13,5 @@ A visualization of the k-means clustering algorithm created in javascript, using
 
 
 Points are randomly generated and the k-means are initialized using the [Forgy method](https://en.wikipedia.org/wiki/K-means_clustering#Initialization_methods), where k observations are selected from the dataset and used as the initial means.
+
+Here's the link to the GitHub Pages site: https://a-poor.github.io/k_means/
